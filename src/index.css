@@ -1,0 +1,310 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Dark mode (default) */
+  :root,
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 8%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 14%;
+    --input: 0 0% 14%;
+    --ring: 0 0% 30%;
+
+    --radius: 0.75rem;
+
+    /* Custom colors */
+    --glow-primary: 210 100% 60%;
+    --glow-secondary: 280 100% 60%;
+    --gradient-start: 0 0% 6%;
+    --gradient-end: 0 0% 0%;
+    
+    /* Text hierarchy */
+    --text-primary: 0 0% 98%;
+    --text-secondary: 0 0% 70%;
+    --text-tertiary: 0 0% 50%;
+
+    /* Gradient blob colors */
+    --blob-1: 15 90% 60%;
+    --blob-2: 340 80% 55%;
+    --blob-3: 30 95% 55%;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 2%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 14%;
+    --sidebar-ring: 0 0% 30%;
+  }
+
+  /* Light mode */
+  .light {
+    --background: 40 25% 96%;
+    --foreground: 20 10% 10%;
+
+    --card: 40 20% 94%;
+    --card-foreground: 20 10% 10%;
+
+    --popover: 40 20% 94%;
+    --popover-foreground: 20 10% 10%;
+
+    --primary: 20 10% 10%;
+    --primary-foreground: 40 25% 96%;
+
+    --secondary: 35 15% 90%;
+    --secondary-foreground: 20 10% 10%;
+
+    --muted: 35 12% 88%;
+    --muted-foreground: 20 8% 45%;
+
+    --accent: 35 15% 85%;
+    --accent-foreground: 20 10% 10%;
+
+    --destructive: 0 84% 50%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 35 15% 85%;
+    --input: 35 15% 88%;
+    --ring: 20 10% 30%;
+
+    /* Custom colors for light mode */
+    --glow-primary: 25 95% 55%;
+    --glow-secondary: 340 75% 55%;
+    --gradient-start: 40 20% 94%;
+    --gradient-end: 40 25% 96%;
+    
+    /* Text hierarchy */
+    --text-primary: 20 10% 10%;
+    --text-secondary: 20 8% 35%;
+    --text-tertiary: 20 8% 50%;
+
+    /* Gradient blob colors - warm orange/coral/pink */
+    --blob-1: 15 90% 65%;
+    --blob-2: 340 75% 60%;
+    --blob-3: 30 90% 60%;
+
+    /* Sidebar */
+    --sidebar-background: 40 20% 94%;
+    --sidebar-foreground: 20 10% 10%;
+    --sidebar-primary: 20 10% 10%;
+    --sidebar-primary-foreground: 40 25% 96%;
+    --sidebar-accent: 35 15% 88%;
+    --sidebar-accent-foreground: 20 10% 10%;
+    --sidebar-border: 35 15% 85%;
+    --sidebar-ring: 20 10% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased transition-colors duration-300;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Apply Cabinet Grotesk to all headings */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+
+  ::selection {
+    @apply bg-primary/20 text-foreground;
+  }
+}
+
+@layer components {
+  /* Glassmorphism navbar */
+  .glass-nav {
+    @apply backdrop-blur-xl bg-background/60 border-b border-border/50;
+  }
+
+  /* Gradient glow effect */
+  .glow-effect {
+    position: relative;
+  }
+
+  .glow-effect::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--glow-primary) / 0.3),
+      transparent 50%,
+      hsl(var(--glow-secondary) / 0.3)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .glow-effect:hover::before {
+    opacity: 1;
+  }
+
+  /* Subtle card hover */
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .card-hover:hover {
+    @apply bg-secondary/80 border-border/80;
+    transform: translateY(-2px);
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      to right,
+      hsl(var(--foreground)),
+      hsl(var(--muted-foreground))
+    );
+  }
+
+  /* Pill badge */
+  .pill-badge {
+    @apply px-3 py-1.5 text-sm rounded-full bg-secondary text-secondary-foreground 
+           border border-border/50 transition-all duration-200;
+  }
+
+  .pill-badge:hover {
+    @apply bg-accent border-border;
+  }
+
+  /* Section container - Full width on larger screens */
+  .section-container {
+    @apply w-full max-w-7xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 xl:px-24 py-20 md:py-28 lg:py-32;
+  }
+
+  /* Narrower container for text-heavy content */
+  .section-container-narrow {
+    @apply w-full max-w-5xl mx-auto px-6 sm:px-8 md:px-12 lg:px-16 py-20 md:py-28 lg:py-32;
+  }
+
+  /* Hero gradient spotlight (dark mode) */
+  .hero-gradient {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 80% 50% at 50% -20%,
+      hsl(var(--glow-primary) / 0.15),
+      transparent
+    );
+  }
+
+  /* Warm gradient blob for light mode */
+  .gradient-blob {
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 700px;
+    height: 700px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    background: 
+      radial-gradient(
+        ellipse at 30% 40%,
+        hsl(var(--blob-1) / 0.7) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse at 70% 60%,
+        hsl(var(--blob-2) / 0.6) 0%,
+        transparent 45%
+      ),
+      radial-gradient(
+        ellipse at 50% 80%,
+        hsl(var(--blob-3) / 0.5) 0%,
+        transparent 40%
+      );
+    filter: blur(60px);
+    border-radius: 50%;
+  }
+
+  .light .gradient-blob {
+    opacity: 1;
+  }
+
+  .dark .gradient-blob {
+    opacity: 0;
+  }
+
+  .section-line {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-border to-transparent;
+  }
+}
+
+@layer utilities {
+  /* Cabinet Grotesk for display/headings */
+  .text-display {
+    @apply font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.1];
+  }
+
+  .text-headline {
+    @apply font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight;
+  }
+
+  .text-title {
+    @apply font-display text-xl sm:text-2xl font-semibold tracking-tight;
+  }
+
+  /* Satoshi for body text */
+  .text-body {
+    @apply font-sans text-base text-muted-foreground leading-relaxed;
+  }
+
+  .text-caption {
+    @apply font-sans text-sm text-muted-foreground;
+  }
+
+  /* Animation delays */
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-500 { animation-delay: 500ms; }
+}
