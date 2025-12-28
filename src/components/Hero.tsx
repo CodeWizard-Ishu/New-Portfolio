@@ -20,7 +20,6 @@ export const Hero = () => {
       {/* Gradient spotlight background with parallax (dark mode) */}
       <motion.div className="hero-gradient dark:block hidden" style={{ y: y1 }} />
 
-      {/* Warm gradient blob (light mode - inspired by arlenmccluskey.com) */}
       <motion.div
         className="absolute top-0 right-0 w-[800px] h-[800px] hidden light:block dark:hidden"
         style={{ y: y1 }}
@@ -140,7 +139,7 @@ export const Hero = () => {
             <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
           </a>
           <a
-            href="/resume.pdf"
+            href="https://drive.google.com/file/d/1n7CyWb5IS82HsdA8zPeMi_f6e2k5tS_r/view?usp=sharing"
             target="_blank"
             rel="noopener noreferrer"
             className="group flex items-center gap-2 px-6 py-3 bg-secondary/50 border border-border/50 text-foreground rounded-lg font-medium hover:bg-secondary hover:border-border transition-all duration-200"
